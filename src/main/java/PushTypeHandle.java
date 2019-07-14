@@ -16,8 +16,6 @@ public class PushTypeHandle extends Thread {
         long t1 = System.currentTimeMillis();
         while (true) {
             if (System.currentTimeMillis() - t1 >= 60000) {
-                long t2 = t1;/* 防止T1被回收 */
-                System.out.print("过期时间：" + String.valueOf(System.currentTimeMillis()) + "\n");
                 Socket socket = null;
                 try {
                     socket = new Socket("127.0.0.1", 1993);

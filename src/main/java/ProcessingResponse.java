@@ -31,6 +31,8 @@ public class ProcessingResponse extends Thread {
                         public void value(String _key, String _data, Long _time) {
                             Long time_ = System.currentTimeMillis();
                             if (time_ - _time >= 0) {
+                                /** 先清除 */
+                                _pushTypeClass.removeKey(_key);
                                 ExecutorServiceClass.exe(new Runnable() {
                                     @Override
                                     public void run() {
@@ -40,9 +42,7 @@ public class ProcessingResponse extends Thread {
                                             httpclient.start();
                                             URIBuilder uriBuilder = new URIBuilder(RunVariable.getHttp);
                                             uriBuilder.addParameter("PushScript", _data);
-                                            HttpGet request = new HttpGet(uriBuilder.build());
-                                            Future<HttpResponse> future = httpclient.execute(request, null);
-                                            _pushTypeClass.removeKey(_key);
+                                            httpclient.execute(new HttpGet(uriBuilder.build()), null);
                                         } catch (URISyntaxException e) {
                                             e.printStackTrace();
                                         } finally {
