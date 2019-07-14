@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PushScript:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b80fef02-2c2d-4c15-bb56-8893024bc33c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http" beforeDir="false" afterPath="$PROJECT_DIR$/http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ProcessingResponse$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ProcessingResponse$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ProcessingResponse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ProcessingResponse$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ProcessingResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ProcessingResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProcessingResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProcessingResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PushTypeHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PushTypeHandle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PushScript_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -29,7 +28,7 @@
     <session id="336361018">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="1" />
@@ -440,8 +439,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-29" />
-    <option name="y" value="48" />
+    <option name="x" value="42" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="824" />
   </component>
@@ -459,24 +458,6 @@
             <path>
               <item name="PushScript" type="b2602c69:ProjectViewProjectNode" />
               <item name="PushScript" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="PushScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PushScript" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PushScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PushScript" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PushScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PushScript" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PushScript" type="b2602c69:ProjectViewProjectNode" />
@@ -518,10 +499,10 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563106751924" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563106980001" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -566,12 +547,12 @@
       <workItem from="1563027505672" duration="2567000" />
       <workItem from="1563031676943" duration="838000" />
       <workItem from="1563087522933" duration="1953000" />
-      <workItem from="1563102486672" duration="3843000" />
+      <workItem from="1563102486672" duration="4084000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15969000" />
+    <option name="totallyTimeSpent" value="16210000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -583,8 +564,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-29" y="48" width="1440" height="824" extended-state="0" />
-    <editor active="true" />
+    <frame x="42" y="23" width="1440" height="824" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34477827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -595,7 +575,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.41666666" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41666666" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -759,10 +739,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>PushScript:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
