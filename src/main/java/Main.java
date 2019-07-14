@@ -1,5 +1,8 @@
 public class Main {
     public static void main(String[] args) {
+        /** 获取回调接口 */
+        String http=Main.class.getResource("").getPath()+"http";
+        RunVariable.getHttp=ToolClass.readFileAll(http);
         System.out.print("PushScript 正在运行：\n");
         /** 实例化存储结构 */
         PushTypeClass pushTypeClass = new PushTypeClass();

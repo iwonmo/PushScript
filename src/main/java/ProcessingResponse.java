@@ -1,10 +1,12 @@
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URISyntaxException;
 import java.util.concurrent.Future;
 
 /** 过期检测类 */
@@ -36,9 +38,13 @@ public class ProcessingResponse extends Thread {
                                         CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
                                         try {
                                             httpclient.start();
-                                            HttpGet request = new HttpGet("http://www.iwonmo.com/?PushScript=" + _data);
+                                            URIBuilder uriBuilder = new URIBuilder(RunVariable.getHttp);
+                                            uriBuilder.addParameter("PushScript", _data);
+                                            HttpGet request = new HttpGet(uriBuilder.build());
                                             Future<HttpResponse> future = httpclient.execute(request, null);
                                             _pushTypeClass.removeKey(_key);
+                                        } catch (URISyntaxException e) {
+                                            e.printStackTrace();
                                         } finally {
                                             try {
                                                 httpclient.close();
