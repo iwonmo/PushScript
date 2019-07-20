@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -61,6 +62,27 @@ public class ToolClass {
             }
         });
         return files[files.length - 1].getName();
+    }
+
+    /** 存储PID */
+    public static void savePid(String _pidPath){
+        FileOutputStream outSTr = null;
+        try {
+            outSTr = new FileOutputStream(_pidPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedOutputStream Buff = new BufferedOutputStream(outSTr);
+        String pid= ManagementFactory.getRuntimeMXBean().getName();
+        try {
+            Buff.write(pid.getBytes());
+            Buff.flush();
+            Buff.close();
+            outSTr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

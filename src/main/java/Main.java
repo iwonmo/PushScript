@@ -2,9 +2,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 
 public class Main {
     public static void main(String[] args) {
+        /** 先把PID存储 */
+        ToolClass.savePid(Main.class.getResource("").getPath() + "pid.txt");
         /** 初始化数据库存储目录 */
         String dateDir = Main.class.getResource("").getPath() + "dateDir";
         ToolClass.createDir(dateDir);
