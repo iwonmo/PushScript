@@ -1,6 +1,5 @@
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.util.EntityUtils;
@@ -8,11 +7,11 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URISyntaxException;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-/** 过期检测类 */
+/**
+ * 过期检测类
+ */
 public class ProcessingResponse extends Thread {
     PushTypeClass _pushTypeClass;
 
@@ -32,13 +31,13 @@ public class ProcessingResponse extends Thread {
                 for (int i = 0; i < 5; i++) {
                     _pushTypeClass.forEach(new ValueFuction() {
                         @Override
-                        public void value(String _key, String _data, Long _time,Long _utime,String _type) {
+                        public void value(String _key, String _data, Long _time, Long _utime, String _type) {
                             Long time_ = System.currentTimeMillis();
                             if (time_ - _time >= 0) {
                                 /** 先清除 */
                                 _pushTypeClass.removeKey(_key);
-                                if(_type.equals("uptime"))/** 如果是更新事件 则删除后再更新 */
-                                    _pushTypeClass.set(_key,_data,System.currentTimeMillis() + _utime,_utime,_type);
+                                if (_type.equals("uptime"))/** 如果是更新事件 则删除后再更新 */
+                                    _pushTypeClass.set(_key, _data, System.currentTimeMillis() + _utime, _utime, _type);
                                 ExecutorServiceClass.exe(new Runnable() {
                                     @Override
                                     public void run() {
@@ -46,17 +45,13 @@ public class ProcessingResponse extends Thread {
                                         CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
                                         try {
                                             httpclient.start();
-                                            URIBuilder uriBuilder = new URIBuilder(RunVariable.getHttp);
-                                            uriBuilder.addParameter("psdata", _data);
-                                            uriBuilder.addParameter("pskey", _key);
-                                            uriBuilder.addParameter("pstype", _type);
-                                            final Future future = httpclient.execute(new HttpGet(uriBuilder.build()), null);
+                                            String url=ToolClass.buildGet(RunVariable.getHttp,"pskey=" + _key + "&psdata=" + _data + "&pstype=" + _type);
+                                            final Future future = httpclient.execute(new HttpGet(url), null);
                                             HttpResponse response = (HttpResponse) future.get();
-                                            String result = EntityUtils.toString(response.getEntity(),"UTF-8");
-                                            System.out.print("      "+ToolClass.timeFormat()+"  过期："+_key+"   "+_type+"\n");
-                                        }
-                                        catch (Exception e) { }
-                                        finally {
+                                            String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+                                            System.out.print("      " + ToolClass.timeFormat() + "  过期：" + _key + "   " + _type + "\n");
+                                        } catch (Exception e) {
+                                        } finally {
                                             try {
                                                 httpclient.close();
                                             } catch (IOException e) {

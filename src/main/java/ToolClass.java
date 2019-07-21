@@ -3,6 +3,7 @@ import java.lang.management.ManagementFactory;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class ToolClass {
 
@@ -37,13 +38,18 @@ public class ToolClass {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).toString();
     }
 
-    /** 创建文件夹 */
+    /**
+     * 创建文件夹
+     */
     public static void createDir(String dir) {
         File file = new File(dir);
         if (!file.exists() && !file.isDirectory())
             file.mkdir();
     }
-    /** 获取数据库名称 */
+
+    /**
+     * 获取数据库名称
+     */
     public static String getSqlFile(String filePath) {
         File file = new File(filePath);
         if (file.isFile() || (0 == file.list().length)) {
@@ -64,8 +70,10 @@ public class ToolClass {
         return files[files.length - 1].getName();
     }
 
-    /** 存储PID */
-    public static void savePid(String _pidPath){
+    /**
+     * 存储PID
+     */
+    public static void savePid(String _pidPath) {
         FileOutputStream outSTr = null;
         try {
             outSTr = new FileOutputStream(_pidPath);
@@ -73,7 +81,7 @@ public class ToolClass {
             e.printStackTrace();
         }
         BufferedOutputStream Buff = new BufferedOutputStream(outSTr);
-        String pid= ManagementFactory.getRuntimeMXBean().getName();
+        String pid = ManagementFactory.getRuntimeMXBean().getName();
         try {
             Buff.write(pid.getBytes());
             Buff.flush();
@@ -82,7 +90,25 @@ public class ToolClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
+    /** 生成GET请求 */
+    public static String buildGet(String _url, String pam) {
+        String url = _url.trim();
+        if (url.substring(url.length() - 1, url.length()).equals("/")) {
+            url = url + "?" + pam;
+        } else {
+            /** 这里不考虑 ?= 情况 */
+            boolean isMatch;
+            isMatch = Pattern.matches("(.*)\\?(.*)=(.*)", url);
+            if (isMatch) {
+                url = url + "&" + pam;
+            } else {
+                url = url + "/?" + pam;
+            }
+        }
+        return url;
+    }
+
 
 }
