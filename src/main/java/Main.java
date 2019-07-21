@@ -54,7 +54,7 @@ public class Main {
                 pushTypeClass.clear();
             }
         }
-        //System.out.print("PushScript 正在运行：\n");
+        System.out.print("PushScript 正在运行：\n");
         /** 接收线程 */
         new MonitoringEvents().set_PushType(pushTypeClass).start();
         /** 每秒执行线程 */

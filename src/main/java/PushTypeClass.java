@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,10 +10,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PushTypeClass {
     private ConcurrentHashMap<String, PushType> _PushType = new ConcurrentHashMap();
 
-    public synchronized void set(String key, String _Data, Long _Time,Long _Utime,String _Type) {
-        PushType pushType = new PushType(_Data, _Time,_Utime,_Type);
+    public synchronized void set(String _key, String _Data, Long _Time, Long _Utime, String _Type) {
+        PushType pushType = new PushType(_key, _Data, _Time, _Utime, _Type);
         /** 如果Key已经存在则直接更新 */
-        _PushType.put(key, pushType);
+        _PushType.put(_key, pushType);
     }
 
     public synchronized PushType get(String key) {
@@ -26,14 +28,35 @@ public class PushTypeClass {
         _PushType.remove(_key);
     }
 
-    public synchronized void clear(){
+    public synchronized void clear() {
         _PushType.clear();
     }
 
+    /**
+     * 循环 并且返回过期事件
+     */
+    public synchronized void forEach(ValueFuctionRetList valueFuction) {
+        List<PushType> list = new ArrayList<PushType>();
+        for (Map.Entry<String, PushType> entry : _PushType.entrySet()) {
+            PushType values = entry.getValue();
+            valueFuction.value(entry.getKey(), values.get_Data(), values.get_Time(), values.get_Utime(), values.get_Type(), list);
+        }
+        /** 处理过期事件 */
+        for (PushType pushType__ : list) {
+            _PushType.remove(pushType__.get_Key());
+            if (pushType__.get_Type().equals("uptime"))
+                _PushType.put(pushType__.get_Key(), new PushType(pushType__.get_Key(), pushType__.get_Data(), pushType__.get_Time() + pushType__.get_Utime(), pushType__.get_Utime(), pushType__.get_Type()));
+        }
+        list = null;
+    }
+
+    /**
+     * 循环不处理事件
+     */
     public synchronized void forEach(ValueFuction valueFuction) {
         for (Map.Entry<String, PushType> entry : _PushType.entrySet()) {
             PushType values = entry.getValue();
-            valueFuction.value(entry.getKey(), values.get_Data(), values.get_Time(),values.get_Utime(),values.get_Type());
+            valueFuction.value(entry.getKey(), values.get_Data(), values.get_Time(), values.get_Utime(), values.get_Type());
         }
     }
 
