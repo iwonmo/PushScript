@@ -32,5 +32,7 @@ del:删除对应Key
         } catch (Exception e) {
         }
 ```
+# 编译
+gradle jar
 # 详细
 https://www.iwonmo.com/archives/1575.html

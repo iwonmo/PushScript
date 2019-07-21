@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.UUID;
 
 public class MonitoringEvents extends Thread {
     PushTypeClass _pushTypeClass;
@@ -32,7 +31,7 @@ public class MonitoringEvents extends Thread {
                     inputStream.close();
                     try {
                         JsonObject jsonObject = (JsonObject) new JsonParser().parse(sb.toString());
-                        System.out.print("收到："+jsonObject.get("key").getAsString()+"\n");
+                        //System.out.print("收到："+jsonObject.get("key").getAsString()+"\n");
                         /** 如果是删除事件 则删除对应的key */
                         if( jsonObject.get("type").getAsString().equals("del")){
                             _pushTypeClass.removeKey(jsonObject.get("key").getAsString());

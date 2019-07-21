@@ -1,6 +1,5 @@
 import java.io.*;
 import java.lang.management.ManagementFactory;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -104,7 +103,7 @@ public class ToolClass {
             if (isMatch) {
                 url = url + "&" + pam;
             } else {
-                url = url + "/?" + pam;
+                url = url + "?" + pam;
             }
         }
         return url;

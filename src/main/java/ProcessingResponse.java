@@ -1,3 +1,4 @@
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
@@ -27,7 +28,7 @@ public class ProcessingResponse extends Thread {
             ServerSocket serverSocket = new ServerSocket(1993);
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.print("---- 过期 ----\r\n");
+                //System.out.print("---- 过期 ----\r\n");
                 for (int i = 0; i < 5; i++) {
                     _pushTypeClass.forEach(new ValueFuction() {
                         @Override
@@ -45,11 +46,12 @@ public class ProcessingResponse extends Thread {
                                         CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
                                         try {
                                             httpclient.start();
-                                            String url=ToolClass.buildGet(RunVariable.getHttp,"pskey=" + _key + "&psdata=" + _data + "&pstype=" + _type);
+                                            String url= ToolClass.buildGet(RunVariable.getHttp,"pskey=" + _key + "&psdata=" + _data + "&pstype=" + _type);
                                             final Future future = httpclient.execute(new HttpGet(url), null);
                                             HttpResponse response = (HttpResponse) future.get();
                                             String result = EntityUtils.toString(response.getEntity(), "UTF-8");
-                                            System.out.print("      " + ToolClass.timeFormat() + "  过期：" + _key + "   " + _type + "\n");
+                                            //System.out.print(url+"\r\n");
+                                            //System.out.print("      " + ToolClass.timeFormat() + "  过期：" + _key + "   " + _type + "\n");
                                         } catch (Exception e) {
                                         } finally {
                                             try {

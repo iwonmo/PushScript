@@ -1,15 +1,20 @@
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.lang.management.ManagementFactory;
 
 public class Main {
     public static void main(String[] args) {
+        /** 存储当前路径 */
+        RunVariable.filePath = System.getProperty("user.dir") + File.separator;
+        /** 获取回调接口 */
+        String http = RunVariable.filePath + "http";
+        /** 读取回调地址 */
+        RunVariable.getHttp = ToolClass.readFileAll(http);
         /** 先把PID存储 */
-        ToolClass.savePid(Main.class.getResource("").getPath() + "pid.txt");
+        ToolClass.savePid(RunVariable.filePath + "pid.txt");
         /** 初始化数据库存储目录 */
-        String dateDir = Main.class.getResource("").getPath() + "dateDir";
+        String dateDir = RunVariable.filePath + "dateDir";
         ToolClass.createDir(dateDir);
         /** 实例化存储结构 */
         PushTypeClass pushTypeClass = new PushTypeClass();
@@ -41,7 +46,7 @@ public class Main {
                     }
                 }
                 bf.close();
-                if(num != pushTypeClass.getCount()){
+                if (num != pushTypeClass.getCount()) {
                     throw new Exception("文件存储的数据与真实的数据不相符");
                 }
             } catch (Exception e) {
@@ -49,12 +54,7 @@ public class Main {
                 pushTypeClass.clear();
             }
         }
-        /** 获取回调接口 */
-        String http = Main.class.getResource("").getPath() + "http";
-        /** 读取回调地址 */
-        RunVariable.getHttp = ToolClass.readFileAll(http);
-        RunVariable.filePath = Main.class.getResource("").getPath();
-        System.out.print("PushScript 正在运行：\n");
+        //System.out.print("PushScript 正在运行：\n");
         /** 接收线程 */
         new MonitoringEvents().set_PushType(pushTypeClass).start();
         /** 每秒执行线程 */

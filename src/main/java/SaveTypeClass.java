@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -55,7 +56,7 @@ public class SaveTypeClass extends Thread {
                     e.printStackTrace();
                 }
             }
-        }, 0, 60000, TimeUnit.MILLISECONDS); //3600000 毫秒执行
+        }, 0, 60*60*1000, TimeUnit.MILLISECONDS); //每隔一小时存储一次
 
     }
 }
