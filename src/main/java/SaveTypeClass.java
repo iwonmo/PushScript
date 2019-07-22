@@ -56,7 +56,7 @@ public class SaveTypeClass extends Thread {
                     e.printStackTrace();
                 }
             }
-        }, 0, 60*60*1000, TimeUnit.MILLISECONDS); //每隔一小时存储一次
+        }, 60*60*1000, 60*60*1000, TimeUnit.MILLISECONDS); //每隔一小时存储一次
 
     }
 }

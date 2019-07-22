@@ -1,6 +1,9 @@
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /** 时间管理类 */
 public class PushTypeHandle extends Thread {
@@ -14,9 +17,10 @@ public class PushTypeHandle extends Thread {
     @Override
     public void run() {
         super.run();
-        long t1 = System.currentTimeMillis();
-        while (true) {
-            if (System.currentTimeMillis() - t1 >= 60000) {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
                 Socket socket = null;
                 try {
                     socket = new Socket("127.0.0.1", 1993);
@@ -24,9 +28,8 @@ public class PushTypeHandle extends Thread {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                t1 = System.currentTimeMillis();
             }
-        }
+        }, 60*1000, 60*1000, TimeUnit.MILLISECONDS);
 
     }
 }
