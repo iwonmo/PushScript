@@ -30,15 +30,15 @@ public class ProcessingResponse extends Thread {
             ServerSocket serverSocket = new ServerSocket(1993);
             while (true) {
                 Socket socket = serverSocket.accept();
-                PushType [] pushTypes_tmp;
+                PushType[] pushTypes_tmp;
                 System.out.print("---- 查询事件 ----\r\n");
                 _pushTypeClass.forEach(new ValueFuctionRetList() {
                     @Override
                     public void value(String _key, String _data, Long _time, Long _utime, String _type, List<PushType> _list) {
                         Long time_ = System.currentTimeMillis();
-                        if (time_ - _time >= 0) {
-                            System.out.print("      " + ToolClass.timeFormat() + "  过期：" + _key + "   " + _type + "\n");
-                            _list.add(new PushType(_key,_data,_time,_utime,_type));
+                        if (time_ >= _time) {
+                            System.out.print("      " + ToolClass.timeFormat() + "  过期：" + _key + "   " + String.valueOf(_time) + "   " + _type + "\n");
+                            _list.add(new PushType(_key, _data, _time, _utime, _type));
                             ExecutorServiceClass.exe(new Runnable() {
                                 @Override
                                 public void run() {

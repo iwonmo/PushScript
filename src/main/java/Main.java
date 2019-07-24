@@ -18,6 +18,8 @@ public class Main {
         ToolClass.createDir(dateDir);
         /** 实例化存储结构 */
         PushTypeClass pushTypeClass = new PushTypeClass();
+        /** 开启测试线程 */
+        new testHandle().set_pushTypeClass(pushTypeClass).start();
         /** 读取本地数据库 */
         String sqlName = ToolClass.getSqlFile(dateDir);
         if (!"".equals(sqlName)) {

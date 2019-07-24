@@ -1,15 +1,15 @@
-
 import java.io.IOException;
 import java.net.Socket;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/** 时间管理类 */
-public class PushTypeHandle extends Thread {
+public class testHandle extends Thread {
+
     PushTypeClass _pushTypeClass;
 
-    public PushTypeHandle set_pushTypeClass(PushTypeClass _pushTypeClass) {
+    public testHandle set_pushTypeClass(PushTypeClass _pushTypeClass) {
         this._pushTypeClass = _pushTypeClass;
         return this;
     }
@@ -17,19 +17,19 @@ public class PushTypeHandle extends Thread {
     @Override
     public void run() {
         super.run();
+
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                Socket socket = null;
-                try {
-                    socket = new Socket("127.0.0.1", 1993);
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+               for (int i=0;i<20;i++)
+               {
+                   String _key=UUID.randomUUID().toString();
+                   _pushTypeClass.set(_key, "TestData",System.currentTimeMillis(),Long.valueOf("1000"),"none");
+               }
             }
-        }, 100, 100, TimeUnit.MILLISECONDS); /** 一秒钟检查十次 */
+        }, 50, 50, TimeUnit.MILLISECONDS); /** 一秒钟检查十次 */
+
 
     }
 }
